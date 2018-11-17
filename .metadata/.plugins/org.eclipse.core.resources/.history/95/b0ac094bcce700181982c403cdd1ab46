@@ -1,0 +1,5 @@
+package com.ashok.location.service;
+
+public class LocationService {
+
+}

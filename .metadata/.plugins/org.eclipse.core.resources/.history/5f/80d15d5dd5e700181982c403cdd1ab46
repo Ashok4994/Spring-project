@@ -1,0 +1,25 @@
+package com.ashok.location.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ashok.location.entities.Location;
+import com.ashok.location.service.LocationService;
+
+@Controller
+public class LocationController {
+
+	@Autowired
+	LocationService service;
+	@RequestMapping("/showCreate")
+	public String showCreate() {
+		 return "location";
+	}
+	
+	public String saveLocation(@ModelAttribute("location") Location location) {
+		
+		return "createLocation";
+	}
+}

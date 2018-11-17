@@ -1,0 +1,47 @@
+package com.ashok.location.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.ashok.location.entities.Location;
+import com.ashok.location.service.LocationService;
+
+@Controller
+public class LocationController {
+
+	@Autowired
+	LocationService service;
+	@RequestMapping("/showCreate")
+	public String showCreate() {
+		 return "location";
+	}
+	
+	@RequestMapping("/saveLoc")
+	public String saveLocation(@ModelAttribute("location") Location location,ModelMap modelMap) {
+		Location locSaved = service.saveLocation(location);
+		String msg = "Location saved with id:" + locSaved.getId();
+		modelMap.addAttribute("msg",msg);
+		return "location";
+	}
+
+	@RequestMapping("/dispalyLocations")
+public String dispalyLocations(ModelMap modelMap) {
+	List<Location> locations = service.getAllLocations();
+	modelMap.addAttribute("locations",locations);
+	return "displayLocations";
+}
+	
+@RequestMapping("deleteLocations")	
+public String deleteLocation(@RequestParam("id") int id) {
+	Location location = service.getLocationById(id);
+	service.deleteLocation(location);
+	return "displayLocations";
+}
+	
+}

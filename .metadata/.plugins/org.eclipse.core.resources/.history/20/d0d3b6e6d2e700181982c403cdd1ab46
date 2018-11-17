@@ -1,0 +1,5 @@
+package com.ashok.location.controllers;
+
+public class LocationController {
+
+}
